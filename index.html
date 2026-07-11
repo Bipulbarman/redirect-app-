@@ -1,14 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://example.com">
-    <title>Redirecting...</title>
-    <script>
-        window.location.replace("https://www.effectivecpmnetwork.com/f6s7t70fi?key=a074eb61de693ca5c44f0ccbd0e79eb1");
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Link Preview</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+body{
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+.container{
+    width:100%;
+    max-width:550px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+button{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2196F3;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{
+    background:#1976D2;
+}
+.preview{
+    margin-top:20px;
+    text-align:center;
+}
+.preview img{
+    max-width:100%;
+    max-height:450px;
+    border-radius:10px;
+    display:none;
+    margin:auto;
+}
+.loading{
+    display:none;
+    margin-top:15px;
+    color:#555;
+}
+.error{
+    display:none;
+    color:red;
+    margin-top:10px;
+}
+</style>
+
 </head>
 <body>
-    <p>If you are not redirected automatically, <a href="https://example.com">click here</a>.</p>
+
+<div class="container">
+
+<h2>Image Link Preview</h2>
+
+<input
+id="url"
+type="text"
+placeholder="Paste image URL here">
+
+<button onclick="loadImage()">Preview Image</button>
+
+<div class="loading" id="loading">
+Loading...
+</div>
+
+<div class="error" id="error">
+Unable to load image.
+</div>
+
+<div class="preview">
+<img id="img">
+</div>
+
+</div>
+
+<script>
+
+const input=document.getElementById("url");
+const img=document.getElementById("img");
+const loading=document.getElementById("loading");
+const error=document.getElementById("error");
+
+function loadImage(){
+
+const url=input.value.trim();
+
+img.style.display="none";
+error.style.display="none";
+
+if(url===""){
+alert("Paste an image URL");
+return;
+}
+
+loading.style.display="block";
+
+const preload=new Image();
+
+preload.onload=function(){
+
+img.src=url;
+loading.style.display="none";
+img.style.display="block";
+
+};
+
+preload.onerror=function(){
+
+loading.style.display="none";
+error.style.display="block";
+
+};
+
+preload.src=url;
+
+}
+
+input.addEventListener("keydown",function(e){
+if(e.key==="Enter"){
+loadImage();
+}
+});
+
+</script>
+
 </body>
 </html>
